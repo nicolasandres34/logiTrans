@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solicitud de Servicio - Logitrans Iberia</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #c0392b;
+  --red-dark: #a93226;
+  --dark: #2c2c2c;
+  --mid: #666;
+  --light-bg: #f5f5f5;
+  --border: #ddd;
+  --white: #fff;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  color: var(--dark);
+  background: #fff;
+  line-height: 1.5;
+}
+
+a { color: var(--red); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.topbar {
+  background: #1a1a1a;
+  padding: 7px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  font-size: 11px;
+  color: #aaa;
+  flex-wrap: wrap;
+}
+.topbar span { color: #555; }
+.topbar a { color: #aaa; }
+.topbar a:hover { color: white; text-decoration: none; }
+
+header {
+  background: white;
+  border-bottom: 3px solid var(--red);
+  padding: 14px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-text {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 1px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.logo-text small {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--mid);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+nav { background: #2c2c2c; }
+.nav-inner {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.nav-inner a {
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 13px 16px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-right: 1px solid #3d3d3d;
+  transition: background .15s, color .15s;
+}
+.nav-inner a:first-child { border-left: 1px solid #3d3d3d; }
+.nav-inner a:hover { background: var(--red); color: white; text-decoration: none; }
+.nav-inner a.active { background: var(--red); color: white; }
+
+.breadcrumb {
+  background: var(--light-bg);
+  border-bottom: 1px solid var(--border);
+  padding: 9px 30px;
+  font-size: 11px;
+  color: var(--mid);
+}
+.breadcrumb a { color: var(--red); }
+
+.page-title {
+  padding: 22px 30px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.page-title h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dark);
+  padding-bottom: 10px;
+  position: relative;
+}
+.page-title h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 45px; height: 3px;
+  background: var(--red);
+}
+
+.page-wrap {
+  max-width: 820px;
+  margin: 28px auto 60px;
+  padding: 0 20px;
+}
+
+.form-section {
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+  background: white;
+}
+.section-title {
+  background: #3a3a3a;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 16px;
+  border-left: 4px solid var(--red);
+}
+.section-body {
+  padding: 20px 16px;
+}
+
+.required-note {
+  font-size: 11px;
+  color: var(--mid);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.field-row {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.col-2 { grid-template-columns: 1fr 1fr; }
+.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+.col-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.col-1 { grid-template-columns: 1fr; }
+.col-2-1 { grid-template-columns: 2fr 1fr; }
+.col-3-1 { grid-template-columns: 1fr 1fr 1fr 0.6fr; }
+
+.field { display: flex; flex-direction: column; gap: 4px; }
+
+.field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dark);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.field label .req { color: var(--red); margin-left: 1px; }
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="tel"],
+.field input[type="number"],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  color: var(--dark);
+  background: white;
+  outline: none;
+  transition: border-color .2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px rgba(192,57,43,0.08);
+}
+.field textarea { resize: vertical; min-height: 70px; }
+
+.select-wrap { position: relative; }
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 8px; top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+  font-size: 11px;
+}
+
+.consent-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 14px;
+  background: #fafafa;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.consent-row input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--red);
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.consent-row label {
+  font-size: 11px;
+  color: var(--mid);
+  line-height: 1.6;
+  cursor: pointer;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.consent-row label strong { color: var(--dark); font-weight: 600; }
+
+.submit-wrap { padding-top: 4px; }
+input[type="submit"] {
+  background: var(--red);
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background .2s;
+}
+input[type="submit"]:hover { background: var(--red-dark, #a93226); }
+
+footer {
+  background: #1a1a1a;
+  color: #888;
+  text-align: center;
+  padding: 16px 20px;
+  font-size: 11px;
+  border-top: 3px solid var(--red);
+}
+footer a { color: #aaa; margin: 0 4px; }
+footer a:hover { color: white; text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .col-2, .col-3, .col-4, .col-2-1, .col-3-1 { grid-template-columns: 1fr; }
+  .nav-inner a { font-size: 11px; padding: 10px 10px; }
+  header { flex-direction: column; gap: 10px; }
+}
+
+/* ── SUCCESS MESSAGE ── */
+#success-message {
+  display: none;
+  max-width: 820px;
+  margin: 40px auto 60px;
+  padding: 0 20px;
+}
+.success-card {
+  border: 1px solid #d4edda;
+  border-left: 5px solid #2E7D32;
+  background: #f6fbf6;
+  padding: 48px 32px;
+  text-align: center;
+}
+.success-icon {
+  width: 60px;
+  height: 60px;
+  background: #2E7D32;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.success-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke: white;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.success-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+.success-card p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+  max-width: 480px;
+  margin: 0 auto 28px;
+}
+.success-card .btn-back {
+  display: inline-block;
+  background: #c0392b;
+  color: white;
+  padding: 10px 28px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+  font-family: 'Open Sans', sans-serif;
+  transition: background .2s;
+}
+.success-card .btn-back:hover { background: #a93226; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>Más información:</span>
+  <a href="tel:900000000">900 000 000</a>
+  <span>|</span>
+  <a href="tel:910000000">910 000 000</a>
+  <span>|</span>
+  <a href="mailto:logistica@logitransiberia.com">logistica@logitransiberia.com</a>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-text">
+    Logitrans
+    <small>Iberia</small>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#">Inicio</a>
+    <a href="#">Logitrans</a>
+    <a href="#">Servicios</a>
+    <a href="#">Flota</a>
+    <a href="#">Contacto</a>
+    <a href="#">Blog</a>
+    <a href="#">Área Clientes</a>
+    <a href="#" class="active">Solicitar Servicio</a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Inicio</a> › <a href="#">Solicitud de Servicio</a>
+</div>
+
+<!-- PAGE TITLE -->
+<div class="page-title">
+  <h1>Solicitud de Servicio</h1>
+</div>
+
+<!-- MAIN -->
+<div class="page-wrap">
+
+  <form id="lead-form" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dd100000BWO0s" method="POST">
+    <input type="hidden" name="oid" value="00Dd100000BWO0s">
+    <input type="hidden" name="retURL" value="https://logitransiberia.es">
+    <input type="hidden" id="js-submit-flag" value="0">
+
+    <!-- ══ SECCIÓN 1: DATOS DEL CLIENTE ══ -->
+    <div class="form-section">
+      <div class="section-title">Datos del cliente solicitante</div>
+      <div class="section-body">
+        <p class="required-note">Los campos marcados con * son obligatorios</p>
+
+        <div class="field-row col-2">
+          <div class="field">
+            <label for="first_name">Nombre <span class="req">*</span></label>
+            <input id="first_name" maxlength="40" name="first_name" type="text" required />
+          </div>
+          <div class="field">
+            <label for="last_name">Apellidos <span class="req">*</span></label>
+            <input id="last_name" maxlength="80" name="last_name" type="text" required />
+          </div>
+        </div>
+
+        <div class="field-row col-2">
+          <div class="field">
+            <label for="email">Email <span class="req">*</span></label>
+            <input id="email" maxlength="80" name="email" type="email" required />
+          </div>
+          <div class="field">
+            <label for="company">Compañía <span class="req">*</span></label>
+            <input id="company" maxlength="40" name="company" type="text" required />
+          </div>
+        </div>
+
+        <div class="field-row col-2">
+          <div class="field">
+            <label for="phone">Teléfono <span class="req">*</span></label>
+            <input id="phone" maxlength="40" name="phone" type="tel" required />
+          </div>
+          <div class="field">
+            <label for="fax">Fax</label>
+            <input id="fax" maxlength="40" name="fax" type="text" />
+          </div>
+        </div>
+
+        <div class="field-row col-2">
+          <div class="field">
+            <label for="street">Dirección <span class="req">*</span></label>
+            <input id="street" name="street" type="text" required />
+          </div>
+          <div class="field">
+            <label for="city">Población <span class="req">*</span></label>
+            <input id="city" maxlength="40" name="city" type="text" required />
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ SECCIÓN 2: DATOS DEL SERVICIO ══ -->
+    <div class="form-section">
+      <div class="section-title">Datos del Servicio</div>
+      <div class="section-body">
+
+        <div class="field-row col-2">
+          <div class="field">
+            <label for="00Nd10000099SUX">Nombre del solicitante <span class="req">*</span></label>
+            <input id="00Nd10000099SUX" maxlength="100" name="00Nd10000099SUX" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000098vC1">Tipo de Servicio <span class="req">*</span></label>
+            <div class="select-wrap">
+              <select id="00Nd10000098vC1" name="00Nd10000098vC1" title="Service Type" required>
+                <option value="">— Seleccione —</option>
+                <option value="Nacional">Nacional</option>
+                <option value="Internacional">Internacional</option>
+                <option value="Última milla">Última milla</option>
+                <option value="Urgente">Urgente</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-row col-3-1">
+          <div class="field">
+            <label for="00Nd10000099SZN">Bultos <span class="req">*</span></label>
+            <input id="00Nd10000099SZN" name="00Nd10000099SZN" size="20" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099SeD">Palets <span class="req">*</span></label>
+            <input id="00Nd10000099SeD" name="00Nd10000099SeD" size="20" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099Sfp">Peso <span class="req">*</span></label>
+            <input id="00Nd10000099Sfp" name="00Nd10000099Sfp" size="20" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099Skf">Unidad <span class="req">*</span></label>
+            <div class="select-wrap">
+              <select id="00Nd10000099Skf" name="00Nd10000099Skf" title="Unidad" required>
+                <option value="">—</option>
+                <option value="Kg (Kilogramo)">Kg</option>
+                <option value="Gr (Gramo)">Gr</option>
+                <option value="Ton (Tonelada)">Ton</option>
+                <option value="Lb (Libras)">Lb</option>
+                <option value="Oz (Onzas)">Oz</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-row col-1">
+          <div class="field">
+            <label for="00Nd10000099TIX">Kg Volumen</label>
+            <input id="00Nd10000099TIX" maxlength="20" name="00Nd10000099TIX" size="20" type="text" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ SECCIÓN 3: RECOGIDA ══ -->
+    <div class="form-section">
+      <div class="section-title">Recogida en</div>
+      <div class="section-body">
+
+        <div class="field-row col-2">
+          <div class="field">
+            <label for="00Nd10000099Usv">Nombre <span class="req">*</span></label>
+            <input id="00Nd10000099Usv" maxlength="100" name="00Nd10000099Usv" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099VQn">Población <span class="req">*</span></label>
+            <input id="00Nd10000099VQn" maxlength="100" name="00Nd10000099VQn" type="text" required />
+          </div>
+        </div>
+
+        <div class="field-row col-3">
+          <div class="field">
+            <label for="00Nd10000099WUv">Dirección <span class="req">*</span></label>
+            <input id="00Nd10000099WUv" maxlength="255" name="00Nd10000099WUv" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099X2n">Número <span class="req">*</span></label>
+            <input id="00Nd10000099X2n" maxlength="10" name="00Nd10000099X2n" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099XcH">Piso</label>
+            <input id="00Nd10000099XcH" maxlength="10" name="00Nd10000099XcH" type="text" />
+          </div>
+        </div>
+
+        <div class="field-row col-3">
+          <div class="field">
+            <label for="00Nd10000099YV7">C.P. <span class="req">*</span></label>
+            <input id="00Nd10000099YV7" maxlength="10" name="00Nd10000099YV7" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099Yq5">Persona de contacto <span class="req">*</span></label>
+            <input id="00Nd10000099Yq5" maxlength="100" name="00Nd10000099Yq5" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099ZNx">Teléfono <span class="req">*</span></label>
+            <input id="00Nd10000099ZNx" maxlength="40" name="00Nd10000099ZNx" type="tel" required />
+          </div>
+        </div>
+
+        <div class="field-row col-2">
+          <div class="field">
+            <label for="00Nd10000099ZPZ">Provincia <span class="req">*</span></label>
+            <input id="00Nd10000099ZPZ" maxlength="50" name="00Nd10000099ZPZ" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099ZW1">Horario de Recogida (Mañanas) <span class="req">*</span></label>
+            <input id="00Nd10000099ZW1" maxlength="20" name="00Nd10000099ZW1" type="text" placeholder="Ej: 09:00 - 13:00" required />
+          </div>
+        </div>
+
+        <div class="field-row col-2">
+          <div class="field">
+            <label for="00Nd10000099ZcT">Horario de Recogida (Tardes)</label>
+            <input id="00Nd10000099ZcT" maxlength="20" name="00Nd10000099ZcT" type="text" placeholder="Ej: 15:00 - 19:00" />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099QMI">Observaciones</label>
+            <textarea id="00Nd10000099QMI" name="00Nd10000099QMI" rows="2" wrap="soft"></textarea>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ SECCIÓN 4: ENTREGA ══ -->
+    <div class="form-section">
+      <div class="section-title">Entregar en</div>
+      <div class="section-body">
+
+        <div class="field-row col-2">
+          <div class="field">
+            <label for="00Nd10000099bET">Nombre <span class="req">*</span></label>
+            <input id="00Nd10000099bET" maxlength="100" name="00Nd10000099bET" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099cIb">Población <span class="req">*</span></label>
+            <input id="00Nd10000099cIb" maxlength="100" name="00Nd10000099cIb" type="text" required />
+          </div>
+        </div>
+
+        <div class="field-row col-3">
+          <div class="field">
+            <label for="00Nd10000099cs5">Dirección <span class="req">*</span></label>
+            <input id="00Nd10000099cs5" maxlength="100" name="00Nd10000099cs5" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099eQr">Número <span class="req">*</span></label>
+            <input id="00Nd10000099eQr" maxlength="10" name="00Nd10000099eQr" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099fWb">Piso</label>
+            <input id="00Nd10000099fWb" maxlength="10" name="00Nd10000099fWb" type="text" />
+          </div>
+        </div>
+
+        <div class="field-row col-3">
+          <div class="field">
+            <label for="00Nd10000099g2r">C.P. <span class="req">*</span></label>
+            <input id="00Nd10000099g2r" maxlength="10" name="00Nd10000099g2r" type="text" required />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099g4T">Persona de contacto</label>
+            <input id="00Nd10000099g4T" maxlength="100" name="00Nd10000099g4T" type="text" />
+          </div>
+          <div class="field">
+            <label for="00Nd10000099g65">Teléfono</label>
+            <input id="00Nd10000099g65" maxlength="40" name="00Nd10000099g65" type="tel" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ SECCIÓN 5: CONSENTIMIENTO ══ -->
+    <div class="form-section">
+      <div class="section-title">Consentimiento y envío</div>
+      <div class="section-body">
+
+        <div class="consent-row">
+          <input id="00Nd10000098vDd" name="00Nd10000098vDd" type="checkbox" value="1" required />
+          <label for="00Nd10000098vDd">
+            <strong>Acepto recibir comunicaciones comerciales (Marketing Consent).</strong><br>
+            Consiento que LogiTrans Iberia utilice mis datos de contacto para informarme sobre sus servicios. Puedo revocar este consentimiento en cualquier momento. Consulte nuestra <a href="#">Política de Privacidad</a>.
+          </label>
+        </div>
+
+        <div class="submit-wrap">
+          <input type="submit" value="Enviar solicitud" />
+        </div>
+
+      </div>
+    </div>
+
+  </form>
+
+<!-- SUCCESS MESSAGE -->
+<div id="success-message">
+  <div class="success-card">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>&#161;Solicitud enviada correctamente!</h2>
+    <p>Hemos recibido tu solicitud de servicio.<br>
+    Un asesor de LogiTrans Iberia se pondr&#225; en contacto contigo en un plazo m&#225;ximo de <strong>24 horas h&#225;biles</strong>.</p>
+    <p style="font-size:11px;color:#999;margin-bottom:24px;font-style:italic">Si tienes cualquier consulta urgente puedes llamarnos directamente al <a href="tel:900000000" style="color:#c0392b">900 000 000</a></p>
+    <button class="btn-back" onclick="location.reload()">Enviar otra solicitud</button>
+  </div>
+</div>
+</div><!-- /page-wrap -->
+
+<!-- FOOTER -->
+<footer>
+  © Logitrans Iberia |
+  <a href="#">Aviso Legal</a> -
+  <a href="#">Política de Cookies</a> -
+  <a href="#">Política de Privacidad</a>
+</footer>
+
+
+
+<script>
+document.getElementById('lead-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var form = this;
+  var data = new FormData(form);
+
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    mode: 'no-cors'
+  }).then(function() {
+    document.getElementById('lead-form').style.display = 'none';
+    document.getElementById('success-message').style.display = 'block';
+    window.scrollTo({ top: document.getElementById('success-message').offsetTop - 80, behavior: 'smooth' });
+  }).catch(function() {
+    // no-cors always resolves — this handles network errors
+    document.getElementById('lead-form').style.display = 'none';
+    document.getElementById('success-message').style.display = 'block';
+  });
+});
+</script>
+
+</body>
+</html>
