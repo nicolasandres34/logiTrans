@@ -386,7 +386,8 @@ footer a:hover { color: white; text-decoration: underline; }
 <!-- MAIN -->
 <div class="page-wrap">
 
-  <form id="lead-form" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dd100000BWO0s" method="POST">
+  <iframe name="sf-target" style="display:none"></iframe>
+  <form id="lead-form" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dd100000BWO0s" method="POST" target="sf-target">
     <input type="hidden" name="oid" value="00Dd100000BWO0s">
     <input type="hidden" name="retURL" value="https://logitransiberia.es">
     <input type="hidden" id="js-submit-flag" value="0">
@@ -410,7 +411,7 @@ footer a:hover { color: white; text-decoration: underline; }
 
         <div class="field-row col-2">
           <div class="field">
-            <label for="email">Email <span class="req">*</span></label>
+            <label for="email">Email <span class="req">*</span></label> 
             <input id="email" maxlength="80" name="email" type="email" required />
           </div>
           <div class="field">
@@ -674,24 +675,13 @@ footer a:hover { color: white; text-decoration: underline; }
 
 
 <script>
-document.getElementById('lead-form').addEventListener('submit', function(e) {
-  e.preventDefault();
+document.getElementById('lead-form').addEventListener('submit', function() {
   var form = this;
-  var data = new URLSearchParams(new FormData(form));
-
-  fetch(form.action, {
-    method: 'POST',
-    body: data,
-    mode: 'no-cors'
-  }).then(function() {
-    document.getElementById('lead-form').style.display = 'none';
+  setTimeout(function() {
+    form.style.display = 'none';
     document.getElementById('success-message').style.display = 'block';
     window.scrollTo({ top: document.getElementById('success-message').offsetTop - 80, behavior: 'smooth' });
-  }).catch(function() {
-    // no-cors always resolves — this handles network errors
-    document.getElementById('lead-form').style.display = 'none';
-    document.getElementById('success-message').style.display = 'block';
-  });
+  }, 500);
 });
 </script>
 
