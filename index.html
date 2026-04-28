@@ -558,15 +558,25 @@ footer a:hover { color: white; text-decoration: underline; }
             <input id="00Nd10000099ZPZ" maxlength="50" name="00Nd10000099ZPZ" type="text" required />
           </div>
           <div class="field">
-            <label for="00Nd10000099ZW1">Horario de Recogida (Mañanas) <span class="req">*</span></label>
-            <input id="00Nd10000099ZW1" maxlength="20" name="00Nd10000099ZW1" type="text" placeholder="Ej: 09:00 - 13:00" required />
+            <label>Horario de Recogida (Ma&#241;anas) <span class="req">*</span></label>
+            <input type="hidden" id="00Nd10000099ZW1" name="00Nd10000099ZW1" />
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="manana-desde" type="time" style="flex:1;padding:7px 9px;border:1px solid #ccc;border-radius:2px;font-family:inherit;font-size:12px" required />
+              <span style="color:#666;font-size:12px">&#8211;</span>
+              <input id="manana-hasta" type="time" style="flex:1;padding:7px 9px;border:1px solid #ccc;border-radius:2px;font-family:inherit;font-size:12px" required />
+            </div>
           </div>
         </div>
 
         <div class="field-row col-2">
           <div class="field">
-            <label for="00Nd10000099ZcT">Horario de Recogida (Tardes)</label>
-            <input id="00Nd10000099ZcT" maxlength="20" name="00Nd10000099ZcT" type="text" placeholder="Ej: 15:00 - 19:00" />
+            <label>Horario de Recogida (Tardes)</label>
+            <input type="hidden" id="00Nd10000099ZcT" name="00Nd10000099ZcT" />
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="tarde-desde" type="time" style="flex:1;padding:7px 9px;border:1px solid #ccc;border-radius:2px;font-family:inherit;font-size:12px" />
+              <span style="color:#666;font-size:12px">&#8211;</span>
+              <input id="tarde-hasta" type="time" style="flex:1;padding:7px 9px;border:1px solid #ccc;border-radius:2px;font-family:inherit;font-size:12px" />
+            </div>
           </div>
           <div class="field">
             <label for="00Nd10000099QMI">Observaciones</label>
@@ -678,6 +688,16 @@ if (new URLSearchParams(window.location.search).get('enviado') === '1') {
   document.getElementById('lead-form').style.display = 'none';
   document.getElementById('success-message').style.display = 'block';
 }
+
+document.getElementById('lead-form').addEventListener('submit', function() {
+  var md = document.getElementById('manana-desde').value;
+  var mh = document.getElementById('manana-hasta').value;
+  if (md && mh) document.getElementById('00Nd10000099ZW1').value = md + ' - ' + mh;
+
+  var td = document.getElementById('tarde-desde').value;
+  var th = document.getElementById('tarde-hasta').value;
+  if (td && th) document.getElementById('00Nd10000099ZcT').value = td + ' - ' + th;
+});
 </script>
 
 </body>
